@@ -61,14 +61,13 @@ jobs:
         name: webpack artifacts
         path: public 
     # Setup .npmrc file to publish to GitHub Packages
-    - uses: actions/setup-node@v1
+    - name: Push to GitHub Packages
+      uses: docker/build-push-action@v1
       with:
-        registry-url: 'https://npm.pkg.github.com'
-        # Defaults to the user or organization that owns the workflow file
-        scope: '@octocat'
-    - run: npm install
-    - run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: ahdbilal/github-actions-for-ci/tic-tac-toe
+        tag_with_ref: true
       
     
