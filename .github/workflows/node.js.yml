@@ -16,10 +16,10 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-      - name: npm install and build webpack
-        run: |
-          npm install
-          npm run build
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1.4.3
+      - name: build webpack
+        run: npm run build
       - uses: actions/upload-artifact@master
         with:
           name: webpack artifacts
